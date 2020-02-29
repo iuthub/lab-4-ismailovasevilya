@@ -21,10 +21,20 @@
                 $musics = glob("songs/*.mp3");
                 foreach ($musics as $filename) {
                     ?>
-                    <li class="mp3item"><a href="<?= $filename ?>"> <?= $filename ?> </a></li>
+                    <li class="mp3item"><a href="<?= $filename ?>"> <?= basename($filename) ?> </a></li>
                     <?php
                 }
                 ?>
+                <?php 
+                $playlists = glob("songs/*.txt");
+                foreach ($playlists as $filename) {
+                	?>
+                	<li class="playlistitem"><a href="<?= $filename ?>"><?= basename($filename) ?> </a></li>
+                <?php
+            	}
+                ?>                
+                 
+
 			</ul>
 
 
