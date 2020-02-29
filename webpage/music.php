@@ -20,11 +20,27 @@
                 
                 <?php if (!isset($_REQUEST["playlist"])) {
 	                $musics = glob("songs/*.mp3");
-	                foreach ($musics as $filename) {
-	                    ?>
-	                    <li class="mp3item"><a href="<?= $filename ?>"> <?= basename($filename) ?> </a></li>
+	                foreach ($musics as $filename) {?>
+	                	<?php 
+	                	$filesize = filesize($filename);
+	                	if ($filesize < 1024){
+	                		$filesize = $filesize ." B";
+	                		}
+	                	elseif ($filesize>1024 && $filesize< 10486575) {
+							$filesize=(round($filesize/100, 0, PHP_ROUND_HALF_EVEN)) . " Kb";
+						}
+						elseif ($filesize>=10486575 ) {
+							$filesize=(round($filesize/100000, 0, PHP_ROUND_HALF_EVEN)) . " Mb";
+						}
+	                	 ?>
+	                	
+	                    <li class="mp3item">
+	                    	<a href="<?= $filename ?>"> <?= basename($filename) ?> </a>
+							<span>(<?= $filesize ?>)</span>
+	                    </li>
 	                    <?php
 	                } ?>
+	                
 	                <?php 
 	                $playlists = glob("songs/*.txt");
 	                foreach ($playlists as $filename) {
